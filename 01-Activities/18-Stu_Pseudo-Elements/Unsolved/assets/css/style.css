@@ -60,9 +60,28 @@ article p {
 }
 
 /* TODO: Style the term/phrase - underline, black text, grab cursor */
+.tooltip-term {
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
+  position: relative;
+}
 
 /* TODO: Position tooltip above the term/phrase, same color as header and nav links, no border-radius, smaller font size */
-
+.tooltip-term::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: #13293d;
+  color: #fff;
+  font-size: 90%;
+  white-space: nowrap;
+  border-radius: 0;
+  display: none;
+}
 aside {
   width: 25%;
 }

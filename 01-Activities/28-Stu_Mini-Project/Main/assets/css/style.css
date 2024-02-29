@@ -8,17 +8,22 @@
 
 /* set content highlight color and background */
 ::selection {
+  background-color: var(--bright-turquoise);
+  color: var(--outer-space);
 }
 
 html {
   /* set 1rem to 10px instead of native 16px to make it easier to calculate font-size values for the rest of the page (e.g. 1.6rem is 16px, 2.0rem is 20px, etc.) */
+  font-size: 62.5%;  
+
 }
 
 body {
+  background-color: var(--outer-space);
   /* Sans Serif font stack is implemented to help select the best font for each type of computer operating system */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-
+  font-size: 1.75rem;
   /* set body font size to 1.75rem, which is 1.75x more than the font-size of 10px, making it 17.5px  */
  
 }
@@ -33,11 +38,12 @@ h6 {
   color: var(--heliotrope);
   font-weight: 700;
   line-height: 1.1;
+  text-transform: uppercase;
 }
 
 h1 {
   /* 4rem = 40px (4 * 10px) */
-  
+  font-size: 4rem;
 }
 
 h2 {
@@ -66,7 +72,9 @@ p {
 
 code {
   /* Monospace font stack is used for our code blocks to make it look more like code */
-  
+  font-family: monospace; 
+  font-size: 1.5rem;
+  /* set code font size to 1.5rem, which is 1.5x more than the font-size of 10px, making it 15px  */
 }
 
 header {
@@ -93,8 +101,23 @@ footer {
 
 /* create our main grid with flexbox, use negative margins to offset the padding on the .card-column class */
 .row {
- 
+ display: flex;
+ flex-wrap: wrap;
+ margin: 0 -1.5rem;
 }
+.card-body  {
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start;
+  align-items: center;
+  outline: 2px dashed var(--gin);
+  border-radius: 8px;
+  padding: 1.75rem;
+  min-height: 100%;
+  
+  /* outline is like border, but on the outside of the box instead of inside */
+}
+/* create a flexbox column to align and justify content within it */
 
 .justify-center {
   justify-content: center;
@@ -102,22 +125,36 @@ footer {
 
 /* using a mobile-first approach, set base column width to be 100% and we'll update it using media queries for larger screen sizes */
 .card-column {
-
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100%;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  outline: auto;
+  flex: 1 0 100%;
   /* when the screen resizes, make it so our columns don't jump in size */
   
 }
 
 /* make each code card a flexbox column to align and justify content within it */
 .code-card {
-  
-
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  outline: 2px dashed var(--gin);
+  padding: 1.75rem;
+  min-height: 100%;
+  transition: box-shadow 0.3s ease;
   /* outline is like border, but on the outside of the box instead of inside */
-  
 }
 
 .code-card .card-header {
   /* use position and negative margins to move title of card over the card's outline and create an overlap effect */
-  
+  position: relative;
+  margin: -1.15rem 0 -1.5rem 0;
+
 }
 
 /* set an outer and inner drop shadow on the card to create a glowing effect on hover */
@@ -128,11 +165,12 @@ footer {
 
 /* each card's code block grows to the height of the largest code block on the page, making each card even in height */
 .code-card .code-block {
+  flex-grow: 1 0 100%;
 }
 
 .code-card pre {
   /* set styles to make it so code wraps in <pre> instead of overflowing */
-  
+  overflow: auto;
   /* use linear-gradient() function to create a fading background  */
   background-image: linear-gradient(
     rgba(232, 102, 236, 0.3) 0%,
@@ -147,20 +185,22 @@ footer {
 }
 
 /* using a mobile-first approach, use `min-width` values going from narrow -> wide for a responsive design */
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 992px) {
   /* on tablets, set columns to only be 50% of the width and not grow */
   .card-column {
-   
+   width: 50%;
   }
 
   /* select the last child to grow to full width if it has space to grow */
   .card-column:last-child {
+    flex-grow: 1;
   }
 }
 
 /* media query for larger screens */
 @media screen and (min-width: 700px) {
   header {
+    background: #772014;
   }
 
   .card-column {
